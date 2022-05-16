@@ -1,8 +1,7 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:goldgolia_project/helper/router_helper.dart';
-import 'package:goldgolia_project/util/constants.dart';
+import 'package:goldgolia_project/view/pages/auth/widgets/auth_footer_widget.dart';
+import 'package:goldgolia_project/view/pages/auth/widgets/auth_header/main_auth_header_widget.dart';
 import 'package:goldgolia_project/view/widgets/button_widget.dart';
 import 'package:goldgolia_project/view/widgets/create_page_widget.dart';
 import 'package:goldgolia_project/view/widgets/divider_widget.dart';
@@ -16,38 +15,7 @@ class MainAuthPage extends StatelessWidget {
     return CreateScreenWidget(
       page: ListView(
         children: [
-          const SpacerWidget(
-            height: 20,
-          ),
-          Image.asset(
-            Constants.imageLogo,
-            height: Get.width / 3,
-          ),
-          const SpacerWidget(
-            height: 20,
-          ),
-          Center(
-            child: AutoSizeText(
-              "Welcome Back!",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: Get.width / 13,
-              ),
-            ),
-          ),
-          const SpacerWidget(
-            height: 20,
-          ),
-          Center(
-            child: AutoSizeText(
-              "Let's Share your talent with the world",
-              style: TextStyle(fontSize: Get.width / 20, color: Colors.black54),
-              maxLines: 1,
-            ),
-          ),
-          const SpacerWidget(
-            height: 60,
-          ),
+          const MainAuthHeaderWidget(),
           ButtonWidget(
             text: "Sign up with Email",
             buttonWidth: 1.1,
@@ -57,7 +25,7 @@ class MainAuthPage extends StatelessWidget {
             borderColor: Colors.grey[300],
             buttonBadding: 10,
             textSize: 18,
-            onPress: () => Get.toNamed(RouterHelper.authjoinAsScreen),
+            onPress: () {},
           ),
           const SpacerWidget(
             height: 60,
@@ -70,7 +38,7 @@ class MainAuthPage extends StatelessWidget {
               ),
               Text(
                 " OR ",
-                style: TextStyle(fontSize: Get.width / 20),
+                style: TextStyle(fontSize: Get.width / 23),
               ),
               const DividerWidget(
                 width: 2.5,
@@ -116,26 +84,8 @@ class MainAuthPage extends StatelessWidget {
           const SpacerWidget(
             height: 60,
           ),
-          Center(
-            child: Text.rich(
-              TextSpan(
-                children: [
-                  TextSpan(
-                    text: "Don't have an account ? ",
-                    style: TextStyle(fontSize: Get.width / 22),
-                  ),
-                  WidgetSpan(
-                    child: Text(
-                      "Sign up",
-                      style: TextStyle(
-                        fontSize: Get.width / 23,
-                        color: Colors.yellow[700],
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
+          const AuthFooterWidget(
+            signup: true,
           )
         ],
       ),

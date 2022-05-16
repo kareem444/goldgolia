@@ -20,7 +20,7 @@ class RouterHelper {
     GetPage(name: authjoinAsScreen, page: () => const JoinAsScreen()),
     GetPage(
       name: authPersionalInformationScreen,
-      page: () => const PersionalInformationScreen(),
+      page: () => PersionalInformationScreen(),
     ),
     GetPage(
       name: authPickTalentsScreen,

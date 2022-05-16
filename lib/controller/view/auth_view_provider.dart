@@ -1,4 +1,5 @@
-import 'package:flutter/foundation.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:goldgolia_project/helper/snack_bar_helper.dart';
 
 class AuthViewProvider with ChangeNotifier {
   bool joinAsTalent = true;
@@ -35,11 +36,13 @@ class AuthViewProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  handleTalentsList(String val) {
+  handleTalentsList(BuildContext context, String val) {
     if (talentsList.contains(val)) {
       talentsList.remove(val);
     } else if (talentsList.length < 3) {
       talentsList.add(val);
+    } else {
+      SnackBarHelper.snakeBar(context: context, text: "Max Length Is 3");
     }
     notifyListeners();
   }

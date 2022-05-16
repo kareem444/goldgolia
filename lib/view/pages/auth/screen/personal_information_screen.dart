@@ -4,14 +4,18 @@ import 'package:get/get.dart';
 import 'package:goldgolia_project/controller/view/auth_view_provider.dart';
 import 'package:goldgolia_project/model/user/user_model.dart';
 import 'package:goldgolia_project/service/user_service.dart';
-
+import 'package:goldgolia_project/view/pages/auth/widgets/auth_header/personal_information_auth_header_widget.dart';
 import 'package:goldgolia_project/view/pages/auth/widgets/control_buttons_widget.dart';
+import 'package:goldgolia_project/view/pages/auth/widgets/auth_footer_widget.dart';
 import 'package:goldgolia_project/view/widgets/create_page_widget.dart';
+import 'package:goldgolia_project/view/widgets/input_field_widget.dart';
 import 'package:goldgolia_project/view/widgets/spacer_widget.dart';
 import 'package:provider/provider.dart';
 
 class PersionalInformationScreen extends StatelessWidget {
-  const PersionalInformationScreen({Key? key}) : super(key: key);
+  PersionalInformationScreen({Key? key}) : super(key: key);
+
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +26,7 @@ class PersionalInformationScreen extends StatelessWidget {
     TextEditingController genderController = TextEditingController();
 
     onSubmit() {
-      if (fullNameController.text != "" &&
-          emailController.text != "" &&
-          passwordController.text != "" &&
-          genderController.text != "") {
+      if (_formKey.currentState!.validate()) {
         UserService.signUpUser(
           context,
           UserModel(
@@ -41,24 +42,11 @@ class PersionalInformationScreen extends StatelessWidget {
     }
 
     return CreateScreenWidget(
-      page: ListView(
+        page: Form(
+      key: _formKey,
+      child: ListView(
         children: [
-          const SpacerWidget(
-            height: 20,
-          ),
-          Center(
-            child: AutoSizeText(
-              "Personal inforamtion",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: Get.width / 14,
-              ),
-              maxLines: 1,
-            ),
-          ),
-          const SpacerWidget(
-            height: 20,
-          ),
+          const PersonalInforamtionAuthHeaderWidget(),
           InputField(
             textEditingController: fullNameController,
             text: "Full Name",
@@ -66,14 +54,17 @@ class PersionalInformationScreen extends StatelessWidget {
           InputField(
             textEditingController: emailController,
             text: "Email Adress",
+            email: true,
           ),
           InputField(
             textEditingController: mobileController,
             text: "Mobile number",
+            mobile: true,
           ),
           InputField(
             textEditingController: passwordController,
             text: "Password",
+            password: true,
           ),
           InputField(
             textEditingController: genderController,
@@ -89,62 +80,12 @@ class PersionalInformationScreen extends StatelessWidget {
           const SpacerWidget(
             height: 40,
           ),
-          Center(
-            child: Text.rich(
-              TextSpan(
-                children: [
-                  TextSpan(
-                    text: "Already a member? ",
-                    style: TextStyle(fontSize: Get.width / 22),
-                  ),
-                  WidgetSpan(
-                    child: Text(
-                      "Log in",
-                      style: TextStyle(
-                        fontSize: Get.width / 23,
-                        color: Colors.yellow[700],
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
+          const AuthFooterWidget(),
           const SpacerWidget(
             height: 15,
           ),
         ],
       ),
-    );
-  }
-}
-
-class InputField extends StatelessWidget {
-  const InputField({
-    Key? key,
-    required this.textEditingController,
-    required this.text,
-  }) : super(key: key);
-
-  final TextEditingController textEditingController;
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
-      child: TextField(
-        controller: textEditingController,
-        decoration: InputDecoration(
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.yellow[600]!),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.yellow[600]!),
-          ),
-          hintText: text,
-        ),
-      ),
-    );
+    ));
   }
 }

@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       theme: ThemeData(
-        unselectedWidgetColor: Colors.grey, // <-- your color
+        unselectedWidgetColor: Colors.grey, 
       ),
       debugShowCheckedModeBanner: false,
       getPages: RouterHelper.routes,

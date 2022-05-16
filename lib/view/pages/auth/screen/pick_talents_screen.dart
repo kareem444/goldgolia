@@ -1,9 +1,9 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:goldgolia_project/controller/view/auth_view_provider.dart';
 import 'package:goldgolia_project/helper/router_helper.dart';
 import 'package:goldgolia_project/view/pages/auth/service/pick_talent_service.dart';
+import 'package:goldgolia_project/view/pages/auth/widgets/auth_footer_widget.dart';
+import 'package:goldgolia_project/view/pages/auth/widgets/auth_header/pick_talent_auth_header_widget.dart';
 import 'package:goldgolia_project/view/pages/auth/widgets/control_buttons_widget.dart';
 import 'package:goldgolia_project/view/widgets/check_box_widget.dart';
 import 'package:goldgolia_project/view/widgets/create_page_widget.dart';
@@ -23,38 +23,7 @@ class PickTalentsScreen extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            Column(
-              children: [
-                const SpacerWidget(
-                  height: 20,
-                ),
-                Center(
-                  child: AutoSizeText(
-                    "What talents do you have ?",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: Get.width / 14,
-                    ),
-                    maxLines: 1,
-                  ),
-                ),
-                const SpacerWidget(
-                  height: 20,
-                ),
-                Center(
-                  child: AutoSizeText(
-                    "Maximum of 3 talents can be selected",
-                    style: TextStyle(
-                      fontSize: Get.width / 25,
-                    ),
-                    maxLines: 1,
-                  ),
-                ),
-                const SpacerWidget(
-                  height: 20,
-                ),
-              ],
-            ),
+            const PickTalentAuthWidget(),
             Expanded(
               flex: 4,
               child: Builder(builder: (context) {
@@ -82,7 +51,10 @@ class PickTalentsScreen extends StatelessWidget {
                                 : Colors.black54,
                             onChange: (bool? val) => context
                                 .read<AuthViewProvider>()
-                                .handleTalentsList(talentsListItems[i]),
+                                .handleTalentsList(
+                                  context,
+                                  talentsListItems[i],
+                                ),
                           ),
                         ),
                       ),
@@ -110,27 +82,7 @@ class PickTalentsScreen extends StatelessWidget {
             const SpacerWidget(
               height: 15,
             ),
-            Center(
-              child: Text.rich(
-                TextSpan(
-                  children: [
-                    TextSpan(
-                      text: "Already a member? ",
-                      style: TextStyle(fontSize: Get.width / 22),
-                    ),
-                    WidgetSpan(
-                      child: Text(
-                        "Log in",
-                        style: TextStyle(
-                          fontSize: Get.width / 23,
-                          color: Colors.yellow[700],
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
+            const AuthFooterWidget(),
             const SpacerWidget(
               height: 15,
             ),
